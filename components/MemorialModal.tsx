@@ -129,8 +129,8 @@ export const MemorialModal: React.FC<MemorialModalProps> = ({ message, onClose }
           <div className="absolute top-[-16px] left-0 right-0 h-[16px] bg-[#5c3a21] border-b-2 border-[#3e2723]"></div>
           <div className="absolute bottom-[-16px] left-0 right-0 h-[16px] bg-[#5c3a21] border-t-2 border-[#3e2723]"></div>
 
-          <div className={`vertical-memorial font-kaiti text-[#2c1810] h-full flex flex-col items-stretch justify-start overflow-hidden ${
-            isMobile ? 'p-6 min-h-[60vh] max-h-[80vh]' : 'p-12 md:p-16 min-h-[60vh] max-h-[85vh]'
+          <div className={`vertical-memorial font-kaiti text-[#2c1810] h-full flex flex-col items-stretch justify-start ${
+            isMobile ? 'p-6 min-h-[60vh] max-h-[80vh] overflow-x-auto' : 'p-12 md:p-16 min-h-[60vh] max-h-[85vh] overflow-hidden'
           }`}>
             
             {/* Header: Rightmost (Start) */}
@@ -141,18 +141,18 @@ export const MemorialModal: React.FC<MemorialModalProps> = ({ message, onClose }
             </div>
 
             {/* Content Body */}
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1">
               <ReactMarkdown 
                 components={{
                   code({node, inline, className, children, ...props}: any) {
                      return !inline ? (
-                       <div className={`bg-[#fff] text-[#333] border-2 border-[#8b4513] font-mono shadow-sm ${
-                         isMobile ? 'p-2 my-2 text-xs max-w-[200px]' : 'p-4 my-4 text-sm max-w-[300px]'
+                       <div className={`bg-[#fff] text-[#333] border-2 border-[#8b4513] font-mono shadow-sm overflow-x-auto ${
+                         isMobile ? 'p-2 my-2 text-xs max-w-[180px]' : 'p-4 my-4 text-sm max-w-[300px]'
                        }`} style={{ writingMode: 'horizontal-tb' }}>
-                         <div className={`border-b border-[#8b4513]/30 mb-2 pb-1 text-[#8b4513] font-bold ${
+                         <div className={`border-b border-[#8b4513]/30 mb-2 pb-1 text-[#8b4513] font-bold whitespace-nowrap ${
                            isMobile ? 'text-[10px]' : 'text-xs'
                          }`}>西洋机关</div>
-                         <code {...props}>{children}</code>
+                         <code className="block overflow-x-auto" {...props}>{children}</code>
                        </div>
                      ) : (
                        <code className={`bg-[#e0d0b0] text-[#8b4513] rounded border border-[#c0b090] ${
