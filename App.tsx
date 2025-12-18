@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { GenerateContentResponse } from "@google/genai";
 import { Sidebar } from './components/Sidebar';
 import { MessageItem } from './components/MessageItem';
+import { MemorialModal } from './components/MemorialModal';
+import { MusicPlayer } from './components/MusicPlayer';
 import { IconBrush, IconSend, IconMenuOpen } from './components/Icons';
 import { createChatStream, generateTitle } from './services/geminiService';
 import { Message, ChatSession } from './types';
@@ -13,6 +15,9 @@ const App: React.FC = () => {
   const [input, setInput] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
+  
+  // State for the modal
+  const [viewingMessage, setViewingMessage] = useState<Message | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -61,7 +66,7 @@ const App: React.FC = () => {
   const createNewSession = () => {
     const newSession: ChatSession = {
       id: uuidv4(),
-      title: 'New Audience',
+      title: '新朝会',
       messages: [],
       lastModified: Date.now(),
     };
@@ -192,7 +197,7 @@ const App: React.FC = () => {
             messages: [...s.messages, {
               id: uuidv4(),
               role: 'model',
-              content: "*[The Grand Councilor is silent. The spirits of the network are disturbed.]* \n\n(Error: Failed to fetch response)",
+              content: "*[军机大臣缄默不语，许是灵网受扰。]* \n\n(错误：无法获取回应)",
               timestamp: Date.now()
             }]
           };
@@ -231,7 +236,7 @@ const App: React.FC = () => {
           <button onClick={() => setIsSidebarOpen(true)}>
             <IconMenuOpen className="w-6 h-6" />
           </button>
-          <span className="font-bold font-[Zhi Mang Xing] text-xl">Imperial Review</span>
+          <span className="font-bold font-[Zhi Mang Xing] text-xl">御书房</span>
           <div className="w-6" /> {/* Spacer */}
         </header>
 
@@ -243,17 +248,20 @@ const App: React.FC = () => {
                  <div className="w-24 h-24 border-4 border-[#8B4513] rounded-full flex items-center justify-center mb-6">
                     <span className="font-[Zhi Mang Xing] text-6xl">奏</span>
                  </div>
-                 <h2 className="text-3xl font-bold mb-4 font-kaiti">The Court is in Session</h2>
-                 <p className="text-lg italic font-kaiti">Awaiting Your Majesty's Vermilion Brush...</p>
+                 <h2 className="text-3xl font-bold mb-4 font-kaiti">朝会开启</h2>
+                 <p className="text-lg italic font-kaiti">恭候圣上御笔朱批...</p>
                  <p className="text-sm mt-8 max-w-md text-center font-kaiti">
-                   Use the input below to draft your edict or query the Grand Council. 
-                   The ministers stand ready to advise.
+                   请在下方草拟圣旨或垂询军机处，群臣在此恭候圣谕。
                  </p>
               </div>
             ) : (
               <div className="pb-4">
                 {currentMessages.map(msg => (
-                  <MessageItem key={msg.id} message={msg} />
+                  <MessageItem 
+                    key={msg.id} 
+                    message={msg} 
+                    onView={(m) => setViewingMessage(m)} 
+                  />
                 ))}
                 <div ref={messagesEndRef} />
               </div>
@@ -273,7 +281,7 @@ const App: React.FC = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Draft your imperial edict here..."
+                  placeholder="在此草拟圣旨..."
                   className="flex-1 max-h-48 bg-transparent border-none focus:ring-0 text-[#B91C1C] placeholder-[#B91C1C]/40 text-lg font-kaiti resize-none py-3 px-4 brush-cursor leading-relaxed"
                   rows={1}
                 />
@@ -290,10 +298,20 @@ const App: React.FC = () => {
                 </button>
              </div>
              <div className="text-center mt-2 text-xs text-[#8B4513]/60 font-kaiti">
-               Remember, the Imperial word is final. (Gemini 3 Flash Preview)
+               金口玉言，一言九鼎。(Gemini 3 Flash Preview)
              </div>
           </div>
         </div>
+        
+        {/* Memorial Modal */}
+        <MemorialModal 
+          message={viewingMessage} 
+          onClose={() => setViewingMessage(null)} 
+        />
+        
+        {/* Background Music Player */}
+        <MusicPlayer />
+        
       </main>
     </div>
   );

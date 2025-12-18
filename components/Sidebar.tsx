@@ -36,7 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="p-6 border-b border-[#5c3a21] flex items-center justify-between bg-[#1a0f0a]">
           <div className="flex items-center space-x-3">
             <IconScroll className="w-6 h-6 text-[#c0a060]" />
-            <h1 className="text-xl font-bold tracking-widest font-[Zhi Mang Xing]">Imperial Archives</h1>
+            <h1 className="text-xl font-bold tracking-widest font-[Zhi Mang Xing]">皇家档案</h1>
           </div>
           <button onClick={toggleSidebar} className="md:hidden">
             <IconClose className="w-5 h-5" />
@@ -50,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="w-full flex items-center justify-center space-x-2 bg-[#8B0000] hover:bg-[#a50000] text-[#ffd700] py-3 px-4 rounded-sm border-2 border-[#ffd700] transition-colors shadow-lg group"
           >
             <IconNew className="w-5 h-5 group-hover:rotate-90 transition-transform" />
-            <span className="font-bold tracking-wide">Draft New Edict</span>
+            <span className="font-bold tracking-wide">拟新旨</span>
           </button>
         </div>
 
@@ -58,7 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex-1 overflow-y-auto scroll-bar-custom p-4 space-y-2">
           {sessions.length === 0 ? (
             <div className="text-center text-[#8b6b4e] mt-10 italic">
-              No memorials found in the archive.
+              档案库中暂无奏折。
             </div>
           ) : (
             sessions.map((session) => (
@@ -78,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   onClick={(e) => onDeleteSession(e, session.id)}
                   className="absolute right-2 opacity-0 group-hover:opacity-100 hover:text-red-400 transition-opacity"
-                  title="Burn Memorial"
+                  title="焚毁奏折"
                 >
                   <IconClose className="w-3 h-3" />
                 </button>
@@ -89,7 +89,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Footer */}
         <div className="p-4 border-t border-[#5c3a21] text-xs text-[#5c3a21] text-center font-serif">
-          The Grand Secretariat • {new Date().getFullYear()}
+          内阁 • {new Date().getFullYear()}
         </div>
       </div>
     </>

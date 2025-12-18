@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scroll, PenTool, History, PlusCircle, Send, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Scroll, PenTool, History, PlusCircle, Send, ChevronLeft, ChevronRight, X, Music, VolumeX } from 'lucide-react';
 
 export const IconScroll = ({ className }: { className?: string }) => <Scroll className={className} />;
 export const IconBrush = ({ className }: { className?: string }) => <PenTool className={className} />;
@@ -9,6 +9,8 @@ export const IconSend = ({ className }: { className?: string }) => <Send classNa
 export const IconMenuOpen = ({ className }: { className?: string }) => <ChevronRight className={className} />;
 export const IconMenuClose = ({ className }: { className?: string }) => <ChevronLeft className={className} />;
 export const IconClose = ({ className }: { className?: string }) => <X className={className} />;
+export const IconMusic = ({ className }: { className?: string }) => <Music className={className} />;
+export const IconMusicOff = ({ className }: { className?: string }) => <VolumeX className={className} />;
 
 // A custom "Seal" icon SVG for the Emperor
 export const IconSeal = ({ className }: { className?: string }) => (
