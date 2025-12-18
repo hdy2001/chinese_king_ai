@@ -6,23 +6,11 @@ export const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Use local music file
-  const MUSIC_URL = "/music.mp3";
+  const MUSIC_URL = "./music.mp3";
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.3; // Set low volume for background ambiance
-      
-      // Auto-play on mount
-      audioRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-          console.log("宫廷雅乐已自动开启");
-        })
-        .catch(e => {
-          // Autoplay might be blocked by browser policy
-          console.log("自动播放被浏览器阻止，需手动开启:", e);
-          setIsPlaying(false);
-        });
     }
   }, []);
 
@@ -46,7 +34,7 @@ export const MusicPlayer: React.FC = () => {
   return (
     <div className="fixed bottom-4 right-4 z-40 flex flex-col items-center">
       <audio ref={audioRef} loop>
-        <source src={MUSIC_URL} type="audio/mpeg" />
+        <source src={MUSIC_URL} type="audio/mp3" />
       </audio>
       
       <button 
